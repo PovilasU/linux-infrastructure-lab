@@ -1,0 +1,21 @@
+$TTL    86400
+@       IN      SOA     ns1.demo.local. admin.demo.local. (
+                        1         ; Serial
+                        3600      ; Refresh
+                        1800      ; Retry
+                        604800    ; Expire
+                        86400     ; Negative Cache TTL
+)
+
+; Nameserver
+@       IN      NS      ns1.demo.local.
+
+; A records
+ns1     IN      A       192.168.1.126
+web     IN      A       192.168.1.50
+api     IN      A       192.168.1.60
+mail    IN      A       192.168.1.70
+
+; MX record
+@       IN      MX 10   mail.demo.local.
+
