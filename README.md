@@ -1,27 +1,27 @@
-# Linux Infrastrukturos Laboratorija � Povilas
+# Linux Infrastruktūros Laboratorija – Povilas
 
-Sveiki atvyke i **Povilo Linux Infrastrukturos Laboratorija** � pilnai sukonstruota infrastrukturos projekta, demonstruojanti profesinius igud�ius, reikalingus sistemu administratoriaus, DevOps ar IT infrastrukturos specialisto rolems.
+Sveiki atvykę į **Povilo Linux Infrastruktūros Laboratoriją** – pilnai sukonstruotą infrastruktūros projektą, demonstruojantį profesinius įgūdžius, reikalingus sistemų administratoriaus, DevOps ar IT infrastruktūros specialisto rolėms.
 
-�is projektas buvo sukurtas taip, kad **100% atitiktu realu darbo apra�yma**, iskaitant:
+Šis projektas buvo sukurtas taip, kad **100% atitiktų realų darbo aprašymą**, įskaitant:
 
-- Linux (Debian/Ubuntu) administravima  
-- Web, DNS, MariaDB, Exim4 el. pa�to servisus  
-- VPN (WireGuard) ir saugumo valdyma  
-- Monitoringa (Prometheus + Grafana + Node Exporter)  
-- Atsarginiu kopiju sistema (Restic)  
-- Healthcheck API kurima  
-- Tinklo, serviso ir na�umo diagnostika  
-- Sistemini planavima, diegima ir dokumentavima  
+- Linux (Debian/Ubuntu) administravimą  
+- Web, DNS, MariaDB, Exim4 el. pašto servisus  
+- VPN (WireGuard) ir saugumo valdymą  
+- Monitoringą (Prometheus + Grafana + Node Exporter)  
+- Atsarginių kopijų sistemą (Restic)  
+- Healthcheck API kūrimą  
+- Tinklo, serviso ir našumo diagnostiką  
+- Sisteminį planavimą, diegimą ir dokumentavimą  
 
-Projektas sukonstruotas kaip **mini imones IT infrastruktura**, su realiais servisais, procesais, automatizacija ir profesionalia dokumentacija.
+Projektas sukonstruotas kaip **mini įmonės IT infrastruktūra**, su realiais servisais, procesais, automatizacija ir profesionalia dokumentacija.
 
 ---
 
-# ??? Architekturos schema
+# 🗺️ Architektūros schema
 
 ```
                  +---------------------------+
-                 |       Klientu irenginiai  |
+                 |       Klientų įrenginiai  |
                  +-------------+-------------+
                                |
                                v
@@ -35,7 +35,7 @@ Projektas sukonstruotas kaip **mini imones IT infrastruktura**, su realiais serv
 +------------------------ Linux Serveris ------------------------+
 |                                                              |
 |  +-------------------+    +---------------------------+      |
-|  |  Web (Apache)     |    |      Exim4 Pa�tas         |      |
+|  |  Web (Apache)     |    |      Exim4 Paštas         |      |
 |  |  Healthcheck API  |    |  Vietinis pristatymas     |      |
 |  +---------+---------+    +-------------+-------------+      |
 |            |                             |                  |
@@ -63,61 +63,61 @@ Projektas sukonstruotas kaip **mini imones IT infrastruktura**, su realiais serv
 
 ---
 
-# ?? Projekto struktura
+# 📁 Projekto struktūra
 
 ```
 linux-infrastructure-lab/
-�
-+-- monitoring/
-�   +-- prometheus.yml
-�   +-- node_exporter.service
-�   +-- screenshots/
-�
-+-- backups/
-�   +-- backup.sh
-�   +-- README.md
-�   +-- screenshots/
-�
-+-- dns/
-�   +-- db.demo.local
-�   +-- named.conf.local
-�   +-- README.md
-�   +-- screenshots/
-�
-+-- email/
-�   +-- README.md
-�   +-- screenshots/
-�
-+-- vpn/
-�   +-- README.md
-�   +-- screenshots/
-�
-+-- security/
-�   +-- firewall/
-�       +-- ufw-rules.md
-�       +-- screenshots/
-�
-+-- api-healthcheck/
-�   +-- public/health.php
-�   +-- check.sh
-�   +-- README.md
-�   +-- screenshots/
-�
-+-- README.md (�is failas)
+│
+├── monitoring/
+│   ├── prometheus.yml
+│   ├── node_exporter.service
+│   ├── screenshots/
+│
+├── backups/
+│   ├── backup.sh
+│   ├── README.md
+│   ├── screenshots/
+│
+├── dns/
+│   ├── db.demo.local
+│   ├── named.conf.local
+│   ├── README.md
+│   ├── screenshots/
+│
+├── email/
+│   ├── README.md
+│   ├── screenshots/
+│
+├── vpn/
+│   ├── README.md
+│   ├── screenshots/
+│
+├── security/
+│   ├── firewall/
+│       ├── ufw-rules.md
+│       ├── screenshots/
+│
+├── api-healthcheck/
+│   ├── public/health.php
+│   ├── check.sh
+│   ├── README.md
+│   ├── screenshots/
+│
+└── README.md (šis failas)
 ```
 
 ---
 
-# ??? 1. Monitoringas  
+# 🖥️ 1. Monitoringas  
 **Prometheus + Grafana + Node Exporter**
 
-### ?? Kas padaryta
-- Idiegtas Node Exporter
-- Sukonfiguruotas Prometheus su `prometheus.yml`
+### 🔧 Kas padaryta
+- Įdiegtas Node Exporter
+- Sukonfigūruotas Prometheus su `prometheus.yml`
 - Grafana su Node Exporter dashboard ID: 1860
 - Sukurtos systemd paslaugos
 
-### ?? Ekrano nuotraukos
+### 📸 Ekrano nuotraukos
 
 ![Grafana Dashboard](monitoring/screenshots/grafana-dashboard.png)  
 ![Prometheus Targets](monitoring/screenshots/prometheus-targets.png)  
@@ -125,61 +125,61 @@ linux-infrastructure-lab/
 
 ---
 
-# ?? 2. Atsargines kopijos (Restic)
+# 💾 2. Atsarginės kopijos (Restic)
 
-### ?? Kas padaryta
+### 🔧 Kas padaryta
 - Sukurtas `backup.sh` skriptas
-- Restic saugykla /repo (failu sistema)
-- Atsargines kopijos kasdien per cron
+- Restic saugykla /repo (failų sistema)
+- Atsarginės kopijos kasdien per cron
 - Log'ai `/var/log/restic-backup.log`
 
-### Komanda inicijuoti repozitorija:
+### Komanda inicijuoti repozitoriją:
 ```
 restic init -r /repo
 ```
 
-### Komanda atlikti kopija:
+### Komanda atlikti kopiją:
 ```
 restic backup /etc /var/www /home
 ```
 
-### ?? Screenshot
+### 📸 Screenshot
 ![Restic Log](backups/screenshots/backup-log.png)
 
 ---
 
-# ?? 3. DNS � Bind9
+# 🌐 3. DNS – Bind9
 
-### ?? Kas padaryta:
+### 🔧 Kas padaryta:
 - Sukurta zona: **demo.local**
-- Ira�ai: A, NS, MX, CNAME
+- Įrašai: A, NS, MX, CNAME
 - Zona validuota `named-checkzone`
 
-### ?? Screenshot
+### 📸 Screenshot
 ![DNS Zone File](dns/screenshots/dns-zone.png)  
 ![dig Query](dns/screenshots/dig-query.png)
 
 ---
 
-# ?? 4. El. pa�tas � Exim4
+# ✉️ 4. El. paštas – Exim4
 
-### ?? Kas padaryta:
-- Sukonfiguruota vietine pa�to sistema
-- Pristatymas i `/var/mail/povilas`
+### 🔧 Kas padaryta:
+- Sukonfigūruota vietinė pašto sistema
+- Pristatymas į `/var/mail/povilas`
 - Testavimas komanda:
 ```
 echo "Testas" | mail -s "Tema" povilas
 ```
 
-### ?? Screenshot
+### 📸 Screenshot
 ![Exim Config](email/screenshots/exim4-config.png)  
 ![Mail Delivery](email/screenshots/exim4-mail.png)
 
 ---
 
-# ?? 5. Firewall � UFW
+# 🔐 5. Firewall – UFW
 
-### ?? Atidaryti portai:
+### 🔧 Atidaryti portai:
 ```
 22 (SSH)
 80, 443 (Web)
@@ -189,14 +189,14 @@ echo "Testas" | mail -s "Tema" povilas
 51820 (WireGuard VPN)
 ```
 
-### ?? Screenshot
+### 📸 Screenshot
 ![UFW Status](security/firewall/screenshots/ufw-status.png)
 
 ---
 
-# ??? 6. VPN � WireGuard
+# 🕸️ 6. VPN – WireGuard
 
-### ?? Kas padaryta:
+### 🔧 Kas padaryta:
 - Sugeneruoti raktai:
 ```
 wg genkey | sudo tee server_private.key
@@ -219,20 +219,20 @@ sudo systemctl enable wg-quick@wg0
 sudo systemctl start wg-quick@wg0
 ```
 
-### ?? Screenshot
+### 📸 Screenshot
 ![WG Show](vpn/screenshots/wg-show.png)  
 ![WG Status](vpn/screenshots/wg-status.png)
 
 ---
 
-# ?? 7. Healthcheck API � PHP
+# 🧪 7. Healthcheck API – PHP
 
-### ?? Kas padaryta:
+### 🔧 Kas padaryta:
 - Apache virtual host
 - `/health/health.php` scriptas tikrina:
-  - PHP veikima
-  - MariaDB ry�i
-  - Serverio laika
+  - PHP veikimą
+  - MariaDB ryšį
+  - Serverio laiką
   - Hostname
 
 ### Testavimas:
@@ -241,16 +241,16 @@ curl http://localhost/health/health.php
 ./check.sh
 ```
 
-### ?? Screenshot
+### 📸 Screenshot
 ![Health Output](api-healthcheck/screenshots/health-output.png)
 
 ---
 
-# ??? 8. MariaDB
+# 🗄️ 8. MariaDB
 
 - MariaDB instaliacija  
 - Sukurtas DB naudotojas  
-- API tikrina MySQL prisijungima  
+- API tikrina MySQL prisijungimą  
 
 ### Komanda testuoti:
 ```
@@ -259,39 +259,39 @@ mysql -u root -p -e "SHOW DATABASES;"
 
 ---
 
-# ?? 9. Saugumo priemones
+# 🔒 9. Saugumo priemonės
 
 - UFW firewall  
 - WireGuard VPN  
-- Restic �ifruotos kopijos  
-- Apriboti servisu leidimai  
-- Konfiguruoti systemd servisai  
-- Vengta root teisiu ten, kur nereikia  
+- Restic šifruotos kopijos  
+- Apriboti servisų leidimai  
+- Konfigūruoti systemd servisai  
+- Vengta root teisių ten, kur nereikia  
 
 ---
 
-# ?? 10. Darbo apra�ymo atitikimas
+# 🎯 10. Darbo aprašymo atitikimas
 
-�is projektas irodo:
+Šis projektas įrodo:
 
-? Gebejima administruoti Linux sistemas  
-? Gebejima valdyti Exim4, DNS, web serverius  
-? VPN konfiguravima ir prie�iura  
-? Monitoringa ir na�umo analize  
-? Saugumo praktiku taikyma  
-? Atsarginiu kopiju strategijos igyvendinima  
-? Incidentu diagnostika  
-? Dokumentacija ir procesu valdyma  
+✔ Gebėjimą administruoti Linux sistemas  
+✔ Gebėjimą valdyti Exim4, DNS, web serverius  
+✔ VPN konfiguravimą ir priežiūrą  
+✔ Monitoringą ir našumo analizę  
+✔ Saugumo praktikų taikymą  
+✔ Atsarginių kopijų strategijos įgyvendinimą  
+✔ Incidentų diagnostiką  
+✔ Dokumentaciją ir procesų valdymą  
 
 ---
 
-# ????? Autorius
+# 👨‍💻 Autorius
 **Povilas**  
-Linux sistemu administratorius & PHP programuotojas  
+Linux sistemų administratorius & PHP programuotojas  
 
-�is projektas yra mano profesinio portfolio dalis.
+Šis projektas yra mano profesinio portfolio dalis.
 
 ---
 
-# ?? Licencija
-Projekta leid�iama naudoti mokymosi ir demonstraciniais tikslais.
+# 📄 Licencija
+Projektą leidžiama naudoti mokymosi ir demonstraciniais tikslais.
